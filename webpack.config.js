@@ -4,10 +4,13 @@ module.exports = {
   entry: {
     index: './lib/index.tsx',
   },
-  mode: 'development',
+  // mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist/lib'),library: 'WUI',
     libraryTarget: 'umd'
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {
     rules: [
@@ -17,10 +20,10 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'WUI',
-      template: 'index.html'
-    })
-  ]
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     title: 'WUI',
+  //     template: 'index.html'
+  //   })
+  // ]
 }
