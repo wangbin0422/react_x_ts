@@ -1,6 +1,6 @@
 {
   "name": "react_x_ts",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "types": "dist/lib/index",
