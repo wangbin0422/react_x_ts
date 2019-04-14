@@ -6,7 +6,15 @@ export default function() {
   return (
     <div>
       <button onClick={() => {setVisible(!visible)}}>Click</button>
-      <Dialog visible={visible}>
+      <Dialog
+        visible={visible}
+        buttons={
+          [
+            <button>ok</button>,
+            <button>cancel</button>
+          ]
+        }
+        onClose={() => {setVisible(false)}}>
         <div>hi</div>
       </Dialog>
     </div>

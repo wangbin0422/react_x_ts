@@ -1,18 +1,50 @@
+@import "../_main";
 .ui-dialog {
   position: fixed;
   background: #fff;
-  width: 10em;
-  height: 10em;
+  min-width: 20em;
   border-radius: 5px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
   &-mask {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: fade-out($color: #000000, $amount: 0.5)
+    background: fade-out($color: #000000, $amount: 0.5);
+    z-index: 1;
+  }
+  &-header {
+    font-size: 22px;
+    padding: 8px 16px;
+    border-bottom: 1px solid gray;
+  }
+  &-main {
+    padding: 8px 16px;
+    min-height: 8em;
+  }
+  &-footer {
+    padding: 8px 16px;
+    border-top: 1px solid gray;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-close {
+    position: absolute;
+    left: 100%;
+    bottom: 100%;
+    background: $main-color;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    cursor: pointer;
   }
 }

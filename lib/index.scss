@@ -1,0 +1,22 @@
+[class^=ui-] {
+ box-sizing: border-box;
+ font-size: 14px;
+ &::before,
+ &::after {
+  box-sizing: border-box;
+ }
+}
+
+button {
+ box-sizing: border-box;
+ height: 34px;
+ margin: 0 4px;
+ border-radius: 4px;
+ outline: none;
+ &:first-child {
+  margin-left: 0;
+ }
+ &:last-child {
+  margin-right: 0;
+ }
+}
