@@ -7,7 +7,7 @@ import './dialog.scss'
 
 interface IProps {
   visible: boolean;
-  buttons: Array<ReactElement>;
+  buttons?: Array<ReactElement>;
   onClose: React.MouseEventHandler;
   closeOnMask?: boolean
 }
@@ -36,7 +36,7 @@ const Dialog: React.FunctionComponent<IProps> = (props) => {
           {props.children}
         </main>
         <footer className={sc('footer')}>
-          {props.buttons.map((entry, idx) =>
+          { props.buttons && props.buttons.map((entry, idx) =>
             React.cloneElement(entry, {key: idx})
           )}
         </footer>
@@ -54,5 +54,20 @@ Dialog.defaultProps = {
   closeOnMask: false
 };
 
+const alert = (content: string) => {
+  const component =
+    <Dialog
+      visible={true}
+      onClose={() => {
+        ReactDOM.render(React.cloneElement(component, {visible: false}), _div);
+        ReactDOM.unmountComponentAtNode(_div);
+        _div.remove();
+      }}>{content}</Dialog>;
+  const _div = document.createElement('div');  //做alert组件容器
+  document.body.append(_div);
+  ReactDOM.render(component, _div)
+};
+
+export {alert}
 
 export default Dialog
