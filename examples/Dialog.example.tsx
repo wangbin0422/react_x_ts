@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import Dialog, {alert} from '../lib/Dialog/Dialog';
+import Dialog, {alert, confirm, modal} from '../lib/Dialog/Dialog'
 
 export default function() {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
+  const openModal = () => {
+    const close =
+      modal(<div>
+              <h1>hi</h1>
+              <button onClick={() => close()}>close</button>
+            </div>);
+  };
+
   return (
     <div>
       <div>
@@ -12,7 +20,7 @@ export default function() {
           visible={visible}
           buttons={
             [
-              <button>ok</button>,
+              <button onClick={() => setVisible(false)}>ok</button>,
               <button>cancel</button>
             ]
           }
@@ -22,7 +30,12 @@ export default function() {
       </div>
       <div>
         <h1>example 2</h1>
-        <button onClick={() => alert('wang')}>alert</button>
+        <button onClick={() => alert('alert')}>alert</button>
+        <button onClick={() => confirm('confirm', () => {window.alert('yes')}, () => {window.alert('no')})}>confirm</button>
+      </div>
+      <div>
+        <h1>example 3</h1>
+        <button onClick={openModal}>modal</button>
       </div>
     </div>
   )
