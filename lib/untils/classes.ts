@@ -1,23 +1,35 @@
 const classes = (...names: (string | undefined)[]) => {
-  return names.filter(Boolean).join(' ')
+  return names.filter(Boolean).join(' ');
 };
 
-export {classes}
+export {classes};
 
 interface Options {
   extra: string | undefined
 }
 
-function scopedClassMaker(prefix: string) {
-  return function scopedClass(name?: string, options?: Options) {
-    const result = [prefix, name].filter(Boolean).join('-');
-    if(options && options.extra) {
-      return [result, options && options.extra].filter(Boolean).join(' ')
-    } else {
-      return result
-    }
-  }
+interface ClassToggles {
+  [K: string]: boolean
 }
 
-export {scopedClassMaker}
+function scopedClassMaker(prefix: string) {
+  return function scopedClass(name?: string | ClassToggles, options?: Options) {
+    let _name;
+    let result;
+    if (typeof name === 'string' || name === undefined) {
+      _name = name;
+      result = [prefix, _name].filter(Boolean).join('-');
+    } else {
+      _name = Object.entries(name).filter(entry => entry[1]).map(entry => entry[0]);
+      result = _name.map(entry => [prefix, entry].filter(Boolean).join('-')).join(' ');
+    }
+    if (options && options.extra) {
+      return [result, options && options.extra].filter(Boolean).join(' ');
+    } else {
+      return result;
+    }
+  };
+}
+
+export {scopedClassMaker};
 

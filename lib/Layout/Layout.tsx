@@ -12,11 +12,11 @@ interface IProps extends React.HTMLAttributes<HTMLElement>{
 const Layout: React.FunctionComponent<IProps> = (props) => {
   const {className, ...rest} = props;
   const _children = props.children as Array<ReactElement>;
-  const hasAside = _children &&
+  const hasAside = 'length' in _children &&
     _children.reduce((prev, current) => prev || current.type === Aside, false);
   return (
     <div
-      className={sc('', {extra: [className, hasAside && 'has-aside'].join(' ')})}
+      className={sc({'': true, hasAside}, {extra: className})}
       {...rest}>
       {rest.children}
     </div>
