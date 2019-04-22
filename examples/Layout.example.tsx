@@ -5,47 +5,49 @@ import Footer from '../lib/Layout/Footer';
 import Header from '../lib/Layout/Header';
 import Aside from '../lib/Layout/Aside';
 
+import './Layout.example.scss'
+
 export default function() {
   return (
     <div>
       <div>
         <h2>example 1</h2>
-        <Layout className='hi' style={{height: 300}}>
-          <Header>header</Header>
-          <Content>content</Content>
-          <Footer>footer</Footer>
+        <Layout style={{height: 300, width: 500}}>
+          <Header className='a'>header</Header>
+          <Content className='b'>content</Content>
+          <Footer className='a'>footer</Footer>
         </Layout>
       </div>
       <div>
         <h2>example 2</h2>
-        <Layout className='hi' style={{height: 300}}>
-          <Header>header</Header>
+        <Layout style={{height: 300, width: 500}}>
+          <Header className="a">header</Header>
           <Layout>
-            <Aside>aside</Aside>
-            <Content>content</Content>
+            <Aside className="c">aside</Aside>
+            <Content className="b">content</Content>
           </Layout>
-          <Footer>footer</Footer>
+          <Footer className="a">footer</Footer>
         </Layout>
       </div>
       <div>
         <h2>example 3</h2>
-        <Layout className='hi' style={{height: 300}}>
-          <Header>header</Header>
+        <Layout style={{height: 300, width: 500}}>
+          <Header className="a">header</Header>
           <Layout>
-            <Content>content</Content>
-            <Aside>aside</Aside>
+            <Content className="b">content</Content>
+            <Aside className="c">aside</Aside>
           </Layout>
-          <Footer>footer</Footer>
+          <Footer className="a">footer</Footer>
         </Layout>
       </div>
       <div>
         <h2>example 4</h2>
-        <Layout className='hi' style={{height: 300}}>
-          <Aside>aside</Aside>
+        <Layout className='hi' style={{height: 300, width: 500}}>
+          <Aside className="c">aside</Aside>
           <Layout>
-            <Header>header</Header>
-            <Content>content</Content>
-            <Footer>footer</Footer>
+            <Header className="a">header</Header>
+            <Content className="b">content</Content>
+            <Footer className="a">footer</Footer>
           </Layout>
         </Layout>
       </div>

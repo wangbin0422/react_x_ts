@@ -13,8 +13,8 @@ interface ClassToggles {
 }
 
 const scopedClassMaker = (prefix: string) =>
-  (name: string | ClassToggles, options?: Options) => {
-    return Object
+  (name: string | ClassToggles, options?: Options) =>
+    Object
       .entries(name instanceof Object ? name : {[name]: name})
       .filter(entry => entry[1] !== false)
       .map(entry => entry[0])
@@ -23,7 +23,7 @@ const scopedClassMaker = (prefix: string) =>
         .join('-'))
       .concat(options && options.extra || [])
       .join(' ');
-  };
+
 
 export {scopedClassMaker};
 
