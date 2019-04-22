@@ -29,7 +29,7 @@ describe('classes', () => {
 });
 
 describe('scopedClassMaker', () => {
-  it('x', () => {
+  it('接收字符串或对象', () => {
     const sc = scopedClassMaker('ui-layout');
     expect(sc('')).toEqual('ui-layout');
     expect(sc('x')).toEqual('ui-layout-x');

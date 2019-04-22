@@ -28,7 +28,7 @@ const Dialog: React.FunctionComponent<IProps> = (props) => {
         onClick={(e) => {
           props.closeOnMask && props.onClose(e)
         }}></div>
-      <div className={sc()}>
+      <div className={sc('')}>
         <div
           className={sc('close')}
           onClick={handleClose}>
