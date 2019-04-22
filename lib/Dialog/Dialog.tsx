@@ -62,11 +62,6 @@ Dialog.defaultProps = {
 };
 
 const modal = (content: ReactNode, buttons?: Array<ReactElement>, close?: () => void) => {
-  const handleClose = () => {
-    ReactDOM.render(React.cloneElement(component, {visible: false}), _div);
-    ReactDOM.unmountComponentAtNode(_div);
-    _div.remove();
-  };
   const component = (
     <Dialog
       visible={true}
@@ -81,6 +76,12 @@ const modal = (content: ReactNode, buttons?: Array<ReactElement>, close?: () => 
   const _div = document.createElement('div');  //做dialog组件容器
   document.body.append(_div);
   ReactDOM.render(component, _div);
+
+  const handleClose = () => {
+    ReactDOM.render(React.cloneElement(component, {visible: false}), _div);
+    ReactDOM.unmountComponentAtNode(_div);
+    _div.remove();
+  };
   return handleClose  //闭包传值
 };
 
@@ -98,12 +99,14 @@ const confirm = (content: string, onYes?: () => void, onNo?: () => void) => {
     close();
     onNo && onNo()
   };
-  const buttons = [ <button onClick={handleYes}>yes</button>,
-                    <button onClick={handleNo}>no</button> ];
-  
+  const buttons = [
+    <button onClick={handleYes}>yes</button>,
+    <button onClick={handleNo}>no</button>
+  ];
+
   const close = modal(content, buttons, handleNo);
 };
 
-export {modal, alert, confirm, }
+export {modal, alert, confirm}
 
 export default Dialog
