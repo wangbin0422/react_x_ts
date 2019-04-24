@@ -8,7 +8,6 @@ interface IProps extends React.HTMLAttributes<HTMLElement>{
   children: ReactElement | Array<ReactElement>
 }
 
-
 const Layout: React.FunctionComponent<IProps> = (props) => {
   const {className, ...rest} = props;
   const _children = props.children as Array<ReactElement>;

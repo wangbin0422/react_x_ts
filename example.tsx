@@ -1,42 +1,53 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Route, Link} from 'react-router-dom';
-import IconExample from './examples/Icon.example';
+import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
+import IconDemo from './examples/Icon.demo';
 import ButtonExample from './examples/Button.example';
 import DialogExample from './examples/Dialog.example';
 import LayoutExample from './examples/Layout.example';
+import Content from './lib/Layout/Content';
+import Aside from './lib/Layout/Aside';
+import Header from './lib/Layout/Header';
+import Layout from './lib/Layout/Layout';
+import Footer from './lib/Layout/Footer';
+
+import './example.scss'
+
 
 ReactDOM.render((
   <Router>
-    <div>
-      <header>UI</header>
-      <div>
-        <aside>
+    <Layout className="site-page">
+      <Header className="site-header">UI</Header>
+      <Layout>
+        <Aside className="site-aside">
           <h2>组件</h2>
-          <ol>
+          <ul>
             <li>
-              <Link to="/icon">Icon</Link>
+              <NavLink to="/icon">Icon</NavLink>
             </li>
             <li>
-              <Link to="/button">Button</Link>
+              <NavLink to="/button">Button</NavLink>
             </li>
             <li>
-              <Link to="/dialog">Dialog</Link>
+              <NavLink to="/dialog">Dialog</NavLink>
             </li>
             <li>
-              <Link to="/layout">Layout</Link>
+              <NavLink to="/layout">Layout</NavLink>
             </li>
-          </ol>
-        </aside>
-        <main>
-          <Route path="/icon" component={IconExample}></Route>
+          </ul>
+        </Aside>
+        <Content className="site-main">
+          <Route path="/icon" component={IconDemo}></Route>
           <Route path="/button" component={ButtonExample}></Route>
           <Route path="/dialog" component={DialogExample}></Route>
           <Route path="/layout" component={LayoutExample}></Route>
-        </main>
-      </div>
-    </div>
+        </Content>
+      </Layout>
+      <Footer className="site-footer">
+        &copy; ui
+      </Footer>
+    </Layout>
 
   </Router>
-), document.querySelector('#root'))
+), document.querySelector('#root'));
 

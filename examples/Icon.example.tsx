@@ -7,7 +7,7 @@ const IconExample: React.FunctionComponent = () => {
       <Icon name="wechat"/>
       <Icon name="alipay"/>
     </div>
-  )
-}
+  );
+};
 
-export default IconExample
+export default IconExample;
