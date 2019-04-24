@@ -1,6 +1,7 @@
 import React from 'react';
 import Demo from './Demo';
-import IconExample from './Icon.example'
+import IconExample from './Icon.example';
+
 
 const IconDemo = () => {
   return (
