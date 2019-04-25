@@ -14,7 +14,7 @@ module.exports = Object.assign({}, base, {
     new HtmlWebpackPlugin({
       title: 'WUI',
       template: 'index.html',
-      filename: 'example.html'
+      filename: 'index.html'
     })
   ]
 });
