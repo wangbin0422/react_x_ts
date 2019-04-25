@@ -1,4 +1,4 @@
-const base = require('./webpack.config')
+const base = require('./webpack.config');
 module.exports = Object.assign({}, base, {
   mode: 'production',
   externals: {
@@ -15,4 +15,4 @@ module.exports = Object.assign({}, base, {
       root: 'ReactDOM',
     },
   },
-})
+});

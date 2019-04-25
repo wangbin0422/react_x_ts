@@ -62,5 +62,6 @@ typings/
 .next
 
 /dist/*
+/doc
 .DS_Store
 

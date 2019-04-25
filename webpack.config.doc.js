@@ -1,15 +1,20 @@
 const base = require('./webpack.config');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = Object.assign({}, base, {
-  mode: 'development',
+  mode: 'production',
   entry: {
     example: './example.tsx',
+  },
+  output: {
+    path: path.resolve(__dirname, 'doc')
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'WUI',
-      template: 'index.html'
+      template: 'index.html',
+      filename: 'example.html'
     })
   ]
 });
