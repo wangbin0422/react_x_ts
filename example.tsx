@@ -5,6 +5,7 @@ import IconDemo from './examples/Icon.demo';
 import ButtonExample from './examples/Button.example';
 import DialogExample from './examples/Dialog.example';
 import LayoutExample from './examples/Layout.example';
+import FormExample from './examples/Form.example'
 import Content from './lib/Layout/Content';
 import Aside from './lib/Layout/Aside';
 import Header from './lib/Layout/Header';
@@ -34,6 +35,9 @@ ReactDOM.render((
             <li>
               <NavLink to="/layout">Layout</NavLink>
             </li>
+            <li>
+              <NavLink to="/form">Form</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
@@ -41,6 +45,7 @@ ReactDOM.render((
           <Route path="/button" component={ButtonExample}></Route>
           <Route path="/dialog" component={DialogExample}></Route>
           <Route path="/layout" component={LayoutExample}></Route>
+          <Route path="/form" component={FormExample}></Route>
         </Content>
       </Layout>
       <Footer className="site-footer">

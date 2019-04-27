@@ -4,4 +4,4 @@ mv -f doc/* ./
 git add .
 git commit -m "update"
 git push origin gh-pages
-git checkout master
+git checkout -
