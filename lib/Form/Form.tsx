@@ -6,10 +6,11 @@ export interface FormValue {
 
 interface IProps {
   value: FormValue;
-  fields: Array<{ name: string, label: string, input: { type: string } }>;
+  fields: Array<{ name: string, label: string, input: { type: string} }>;
   buttons: ReactFragment;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
-  onChange: (value: FormValue) => void
+  onChange: (value: FormValue) => void;
+  errors: {[K: string]: string[]}
 }
 
 const Form: React.FunctionComponent<IProps> = (props) => {
@@ -21,7 +22,6 @@ const Form: React.FunctionComponent<IProps> = (props) => {
   const onInputChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormVal = {...formData, [name]: e.target.value};
     props.onChange(newFormVal);
-    console.log(newFormVal);
   };
   return (
     <form onSubmit={onSubmit}>
@@ -32,8 +32,11 @@ const Form: React.FunctionComponent<IProps> = (props) => {
             type={entry.input.type}
             value={formData[entry.name]}
             name={entry.name}
-          // onChange={(e) => onInputChange(entry.name, e.target.value)}/>
-          onChange={onInputChange.bind(null, entry.name)}/>
+            // onChange={(e) => onInputChange(entry.name, e.target.value)}/>
+            onChange={onInputChange.bind(null, entry.name)}/>
+          <div>
+            {props.errors[entry.name]}
+          </div>
         </div>
       )}
       <div>
