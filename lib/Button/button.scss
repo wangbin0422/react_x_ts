@@ -1,0 +1,74 @@
+@import "../_main.scss";
+.ui-btn {
+ display: inline-flex;
+ font-weight: 400;
+ white-space: nowrap;
+ text-align: center;
+ padding: 0 16px;
+ font-size: inherit;
+ border-radius: 4px;
+ cursor: pointer;
+ box-sizing: border-box;
+ vertical-align: middle;
+ justify-content: center;
+ align-items: center;
+ border: none;
+ &:disabled {
+  cursor: not-allowed;
+ }
+ &-default {
+  border: 1px solid $border-color;
+  color: $text-color;
+  background: #ffffff;
+  &:focus, &:hover {
+   color: $main-color;
+   border-color: $main-color;
+  }
+  &:disabled {
+   border-color: lighten($border-color, 20%);
+   color: lighten($text-color, 20%);
+   background-color: lighten($border-color, 38%);
+  }
+ }
+ &-primary {
+  border-color: $main-color;
+  background-color: $main-color;
+  color: #ffffff;
+  &:focus, &:hover {
+   background-color: darken($main-color, 6%);
+  }
+  &:disabled {
+   border-color: lighten($main-color, 15%);
+   background-color: lighten($main-color, 15%);
+  }
+ }
+ &-danger {
+  color: #f5222d;
+  background-color: #f5f5f5;
+  border-color: darken($border-color, 20%);
+   &:focus, &:hover {
+    color: #fff;
+    background-color: #ff4d4f;
+    border-color: #ff4d4f
+   }
+   &:disabled {
+    color: #f5222d;
+    background-color: darken(#f5f5f5, 6%);
+   }
+ }
+
+}
+.ui-btn-loadingIcon {
+ &-animationStart {
+  margin-left: -16px !important;
+  opacity: 0;
+ }
+ &-animationEnd {
+  margin-left: 0 !important;
+  opacity: 1;
+  transition: margin-left 200ms, opacity 200ms;
+ }
+}
+.ui-btn + .ui-btn {
+ margin-left: 6px;
+}

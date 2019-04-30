@@ -1,6 +1,16 @@
+@keyframes ui-keyframes-spin {
+  0% {transform: rotate(0);}
+  100% {transform: rotate(360deg);}
+}
+@mixin spin() {
+  animation: ui-keyframes-spin 1s linear infinite;
+}
 .ui-icon {
   width: 1.6em;
   height: 1.6em;
   display: inline-block;
   fill: currentColor;
+  &-loading {
+    @include spin;
+  }
 }

@@ -41,7 +41,7 @@ const Vaildator = (formValue: FormValue, rules: FormRules): FormErrors => {
     if (rules.maxLength && !isEmpty(_value) && _value!.length > rules.maxLength) {
       errorsList(rules.key, 'long');
     }
-    if (rules.pattern && !rules.pattern.test(_value)) {
+    if (!isEmpty(_value) && rules.pattern && !rules.pattern.test(_value)) {
       errorsList(rules.key, 'RegExp');
     }
   });
