@@ -2,7 +2,7 @@ const classes = (...names: (string | undefined)[]) => {
   return names.filter(Boolean).join(' ');
 };
 
-export {classes};
+export default classes;
 
 interface Options {
   extra: string | undefined

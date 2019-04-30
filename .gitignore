@@ -63,5 +63,6 @@ typings/
 
 /dist/*
 /doc
+lib/__tests__/__snapshots__
 .DS_Store
 

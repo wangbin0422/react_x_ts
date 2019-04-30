@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Dialog, {alert, confirm, modal} from '../lib/Dialog/Dialog'
+import Button from '../lib/Button/Button';
 
 export default function() {
   const [visible, setVisible] = useState(false);
@@ -7,7 +8,10 @@ export default function() {
     const close =
       modal(<div>
               <h1>hi</h1>
-              <button onClick={() => close()}>close</button>
+              <Button
+                onClick={() => close()}>
+                close
+              </Button>
             </div>);
   };
 
@@ -15,13 +19,15 @@ export default function() {
     <div>
       <div>
         <h1>example 1</h1>
-        <button onClick={() => {setVisible(!visible)}}>Click</button>
+        <Button onClick={() => {setVisible(!visible)}}>Click</Button>
         <Dialog
           visible={visible}
           buttons={
             [
-              <button onClick={() => setVisible(false)}>ok</button>,
-              <button>cancel</button>
+              <Button
+                level="primary"
+                onClick={() => setVisible(false)}>ok</Button>,
+              <Button>cancel</Button>
             ]
           }
           onClose={() => {setVisible(false)}}>
@@ -30,12 +36,18 @@ export default function() {
       </div>
       <div>
         <h1>example 2</h1>
-        <button onClick={() => alert('alert')}>alert</button>
-        <button onClick={() => confirm('confirm', () => {window.alert('yes')}, () => {window.alert('no')})}>confirm</button>
+        <Button onClick={() => alert('alert')}>alert</Button>
+        <Button
+          onClick={() => confirm(
+            'confirm',
+            () => {window.alert('yes')},
+            () => {window.alert('no')})}>
+          confirm
+        </Button>
       </div>
       <div>
         <h1>example 3</h1>
-        <button onClick={openModal}>modal</button>
+        <Button onClick={openModal}>modal</Button>
       </div>
     </div>
   )

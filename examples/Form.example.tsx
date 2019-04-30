@@ -1,6 +1,7 @@
 import React, {useState, Fragment} from 'react';
 import Form, {FormValue} from './../lib/Form/Form';
 import Vaildator, {noErrors} from '../lib/Form/validator';
+import Button from '../lib/Button/Button';
 
 export default function () {
   const [formData, setFormData] = useState<FormValue>({
@@ -39,12 +40,18 @@ export default function () {
         onChange={(formData) => setFormData(formData)}
         buttons={
           <Fragment>
-            <button type="submit">提交</button>
-            <button>返回</button>
+            <Button
+              type="submit"
+              level="primary">
+              提交
+            </Button>
+            <Button>返回</Button>
           </Fragment>
         }
         errors={errors}/>
+
     </div>
+
 
   );
 }

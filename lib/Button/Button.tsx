@@ -1,4 +1,5 @@
-import React, {Fragment} from 'react';
+import * as React from 'react';
+import {Fragment} from 'react';
 import {scopedClassMaker} from '../untils/classes';
 import Icon from '../Icon/Icon';
 import './button.scss';
@@ -7,7 +8,7 @@ const sc = scopedClassMaker('ui-btn');
 const sc_icon = scopedClassMaker('ui-icon');
 
 interface IProps {
-  level: string;
+  level?: 'default' | 'primary' | 'danger';
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   icon?: string;
@@ -37,7 +38,7 @@ const Button: React.FunctionComponent<IProps> = (props) => {
 
   return (
     <button
-      className={sc({'': true, [props.level]: true})}
+      className={sc({'': true, [props.level!]: true})}
       type={props.type}
       disabled={props.disabled}
       onClick={onClick}>
@@ -46,6 +47,7 @@ const Button: React.FunctionComponent<IProps> = (props) => {
   );
 };
 Button.defaultProps = {
+  level: 'default',
   disabled: false,
   type: 'button',
   iconPosition: 'left'

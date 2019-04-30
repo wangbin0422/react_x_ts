@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Highlight, {defaultProps} from 'prism-react-renderer';
 import {useState} from 'react';
+import Button from '../lib/Button/Button';
 
 interface IProps {
   code: string
@@ -29,10 +30,11 @@ const Demo: React.FunctionComponent<IProps> = (props) => {
         {props.children}
       </div>
       <div>
-        <button
+        <Button
+          level="default"
           onClick={() => {setSnippetVisible(!snippetVisible);}}>
           view code
-        </button>
+        </Button>
         {snippetVisible && snippet}
       </div>
     </div>

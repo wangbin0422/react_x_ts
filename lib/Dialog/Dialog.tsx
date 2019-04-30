@@ -4,6 +4,7 @@ import {scopedClassMaker} from '../untils/classes';
 
 import {Icon} from '../index'
 import './dialog.scss'
+import Button from '../Button/Button';
 
 interface IProps {
   visible: boolean;
@@ -86,7 +87,7 @@ const modal = (content: ReactNode, buttons?: Array<ReactElement>, close?: () => 
 };
 
 const alert = (content: string) => {
-  const buttons = [<button onClick={() => close()}>ok</button>];
+  const buttons = [<Button level="primary" onClick={() => close()}>ok</Button>];
   const close = modal(content, buttons);
 };
 
@@ -100,8 +101,10 @@ const confirm = (content: string, onYes?: () => void, onNo?: () => void) => {
     onNo && onNo()
   };
   const buttons = [
-    <button onClick={handleYes}>yes</button>,
-    <button onClick={handleNo}>no</button>
+    <Button
+      level="primary"
+      onClick={handleYes}>yes</Button>,
+    <Button onClick={handleNo}>no</Button>
   ];
 
   const close = modal(content, buttons, handleNo);
