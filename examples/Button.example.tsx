@@ -16,8 +16,17 @@ export default function () {
         <Button level="primary" disabled={true}>Primary</Button>
         <Button level="danger" disabled={true}>Danger</Button>
       </div>
+      <br/>
       <h2>加载Loading</h2>
       <div style={{padding: '6px 0'}}>
+        <Button
+          level="default"
+          icon="alipay"
+          loading={state.loading}
+          iconPosition="right"
+          onClick={() => {setState({loading: !state.loading})}}>
+          Click Loading
+        </Button>
         <Button
           level="primary"
           icon="wechat"

@@ -32,7 +32,7 @@ const Button: React.FunctionComponent<IProps> = (props) => {
 
   const onClick = (e: React.MouseEvent) => {
     if (props.disabled) return e.preventDefault();
-    props.onClick && props.onClick.call(e.target, e);
+    props.onClick && props.onClick.call(null, e.target, e);
   };
 
   return (
