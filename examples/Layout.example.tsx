@@ -12,7 +12,7 @@ export default function() {
     <div>
       <div>
         <h2>example 1</h2>
-        <Layout style={{height: 300, width: 500}}>
+        <Layout className="layout-demo">
           <Header className='a'>header</Header>
           <Content className='b'>content</Content>
           <Footer className='a'>footer</Footer>
@@ -20,7 +20,7 @@ export default function() {
       </div>
       <div>
         <h2>example 2</h2>
-        <Layout style={{height: 300, width: 500}}>
+        <Layout className="layout-demo">
           <Header className="a">header</Header>
           <Layout>
             <Aside className="c">aside</Aside>
@@ -31,7 +31,7 @@ export default function() {
       </div>
       <div>
         <h2>example 3</h2>
-        <Layout style={{height: 300, width: 500}}>
+        <Layout className="layout-demo">
           <Header className="a">header</Header>
           <Layout>
             <Content className="b">content</Content>
@@ -42,7 +42,7 @@ export default function() {
       </div>
       <div>
         <h2>example 4</h2>
-        <Layout className='hi' style={{height: 300, width: 500}}>
+        <Layout className="layout-demo layout-vertical">
           <Aside className="c">aside</Aside>
           <Layout>
             <Header className="a">header</Header>

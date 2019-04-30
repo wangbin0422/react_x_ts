@@ -23,7 +23,7 @@ export default function () {
       {key: 'password', required: true}
     ];
     const errors = Vaildator(formData, rules);
-    if(noErrors(errors)) {
+    if (noErrors(errors)) {
       // no error
     } else {
       setErrors(errors);

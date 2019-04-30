@@ -5,14 +5,14 @@
  &-content {
   flex-grow: 1;
  }
- & & {
+ &>& {
   flex-grow: 1;
   flex-direction: row;
  }
- &-hasAside {
-  flex-direction: row;
-  .ui-layout {
-   flex-direction: column;
-  }
+}
+.layout-vertical {
+ flex-direction: row;
+ .ui-layout {
+  flex-direction: column;
  }
 }

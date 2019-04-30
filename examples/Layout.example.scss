@@ -1,23 +1,18 @@
 .a {
  height: 40px;
- background-color: #4285f4;
- opacity: .8;
+ background: #7dbcea;
  color: #fff;
- margin: 4px 0;
 }
 .b {
- background-color: lighten(#4285f4, 8%);
- opacity: .8;
+ background: rgba(16, 142, 233, 1);
  color: #fff;
- margin: 4px 0;
 }
 .c {
- background-color: #ea4335;
+ background: #3ba0e9;
+ color: #fff;
  width: 180px;
  opacity: .8;
- color: #fff;
- margin: 4px 0;
 }
-.c + .b, .b + .c, .c + .ui-layout {
- margin-left: 8px;
+.layout-demo {
+ min-height: 40vh;
 }
