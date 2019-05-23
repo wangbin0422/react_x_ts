@@ -15,4 +15,8 @@
     font-style: $font-size-small;
     color: $red;
   }
+  &-input-wrapper {
+    margin-bottom: 8px;
+    display: inline-flex;
+  }
 }

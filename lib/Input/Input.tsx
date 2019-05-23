@@ -4,7 +4,7 @@ import './input.scss'
 
 const sc = scopedClassMaker('ui-input');
 
-interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   length?: number | string;
 }
 

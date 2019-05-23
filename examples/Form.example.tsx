@@ -1,6 +1,6 @@
 import React, {useState, Fragment} from 'react';
-import Form, {FormValue} from './../lib/Form/Form';
-import Vaildator, {noErrors} from '../lib/Form/validator';
+import Form, {FormValue, FormField} from './../lib/Form/Form';
+import Vaildator from '../lib/Form/validator';
 import Button from '../lib/Button/Button';
 
 export default function () {
@@ -9,27 +9,28 @@ export default function () {
     password: ''
   });
 
-  const [fields] = useState([
-    {name: 'username', label: '用户名',labelWidth: '3em', input: {type: 'text'}},
-    {name: 'password', label: '密码',labelWidth: '3em', input: {type: 'password'}}
+  const [fields] = useState<FormField[]>([
+    {name: 'username', label: '用户名',labelWidth: 3, input: {type: 'text'}},
+    {name: 'password', label: '密码',labelWidth: 3, input: {type: 'password'}}
   ]);
 
   const [errors, setErrors] = useState({});
 
+  const rules = [
+    {key: 'username', required: true},
+    {key: 'username', minLength: 8, maxLength: 16},
+    {key: 'username', pattern: /^[A-Za-z0-9]+$/},
+    {key: 'password', required: true}
+  ];
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const rules = [
-      {key: 'username', required: true},
-      {key: 'username', minLength: 8, maxLength: 16},
-      {key: 'username', pattern: /^[A-Za-z0-9]+$/},
-      {key: 'password', required: true}
-    ];
     const errors = Vaildator(formData, rules);
-    if (noErrors(errors)) {
-      console.log(errors);
-      // no error
-    } else {
-      setErrors(errors);
-    }
+    setErrors(errors);
+  };
+  const onChange = (formData: FormValue) => {
+    setFormData(formData);
+    // const errors = Vaildator(formData, rules);
+    // setErrors(errors);
   };
 
   return (
@@ -38,7 +39,7 @@ export default function () {
         value={formData}
         fields={fields}
         onSubmit={handleSubmit}
-        onChange={(formData) => setFormData(formData)}
+        onChange={onChange}
         buttons={
           <Fragment>
             <Button
