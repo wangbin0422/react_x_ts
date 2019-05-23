@@ -14,6 +14,38 @@ export default function () {
         <Input placeholder="密码" type="password"/>
         <Input length={10} disabled={true} value={value} placeholder="disabled"/>
       </div>
+      <br/>
+      <h3>label输入框</h3>
+      <div style={{padding: '8px 0'}}>
+        <div>
+          <Input value={value} onChange={onChange} label="账号"/>
+        </div>
+        <div>
+          <Input value={value} onChange={onChange} label="账号" labelPosition="top"/>
+        </div>
+      </div>
+      <br/>
+      <h3>error输入框</h3>
+      <div style={{padding: '8px 0'}}>
+        <div>
+          <Input
+            value={value}
+            onChange={onChange}
+            label="账号"
+            error="错误提示"
+          />
+        </div>
+        <br/>
+        <div>
+          <Input
+            value={value}
+            onChange={onChange}
+            label="账号"
+            error="错误提示"
+            errorPosition="bottom"
+          />
+        </div>
+      </div>
     </div>
   )
 };

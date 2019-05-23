@@ -33,16 +33,16 @@ const Vaildator = (formValue: FormValue, rules: FormRules): FormErrors => {
   rules.map(rules => {
     const _value = formValue[rules.key];
     if (rules.required && isEmpty(_value)) {
-      errorsList(rules.key, 'required');
+      errorsList(rules.key, '必填');
     }
     if (rules.minLength && !isEmpty(_value) && _value!.length < rules.minLength) {
-      errorsList(rules.key, 'short');
+      errorsList(rules.key, '长度过短');
     }
     if (rules.maxLength && !isEmpty(_value) && _value!.length > rules.maxLength) {
-      errorsList(rules.key, 'long');
+      errorsList(rules.key, '长度过长');
     }
     if (!isEmpty(_value) && rules.pattern && !rules.pattern.test(_value)) {
-      errorsList(rules.key, 'RegExp');
+      errorsList(rules.key, '信息有误');
     }
   });
   return errors;
