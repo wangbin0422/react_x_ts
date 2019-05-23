@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 import IconDemo from './examples/Icon.demo';
+import InputExample from './examples/Input.example';
 import ButtonExample from './examples/Button.example';
 import DialogExample from './examples/Dialog.example';
 import LayoutExample from './examples/Layout.example';
@@ -19,7 +20,7 @@ ReactDOM.render((
   <Router>
     <Layout className="site-page">
       <Header className="site-header">UI</Header>
-      <Layout>
+      <Layout style={{marginBottom: '40px'}}>
         <Aside className="site-aside">
           <h2>组件</h2>
           <ul>
@@ -36,6 +37,9 @@ ReactDOM.render((
               <NavLink to="/layout">Layout</NavLink>
             </li>
             <li>
+              <NavLink to="/input">Input</NavLink>
+            </li>
+            <li>
               <NavLink to="/form">Form</NavLink>
             </li>
           </ul>
@@ -46,6 +50,7 @@ ReactDOM.render((
           <Route path="/dialog" component={DialogExample}></Route>
           <Route path="/layout" component={LayoutExample}></Route>
           <Route path="/form" component={FormExample}></Route>
+          <Route path="/input" component={InputExample}></Route>
         </Content>
       </Layout>
       <Footer className="site-footer">

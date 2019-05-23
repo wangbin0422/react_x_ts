@@ -1,12 +1,16 @@
 import React, {ReactFragment} from 'react';
+import {scopedClassMaker} from '../untils/classes';
+import './form.scss'
 
 export interface FormValue {
   [K: string]: any
 }
 
+const sc = scopedClassMaker('ui-form');
+
 interface IProps {
   value: FormValue;
-  fields: Array<{ name: string, label: string, input: { type: string} }>;
+  fields: Array<{ name: string, label: string,labelWidth: string, input: { type: string} }>;
   buttons: ReactFragment;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   onChange: (value: FormValue) => void;
@@ -26,17 +30,21 @@ const Form: React.FunctionComponent<IProps> = (props) => {
   return (
     <form onSubmit={onSubmit}>
       {props.fields.map((entry, idx) =>
-        <div key={idx}>
-          {entry.label}
+        <div key={idx} className={sc('row')}>
+          <label className={sc('label')} style={{width: entry.labelWidth}}>{entry.label}</label>
           <input
             type={entry.input.type}
             value={formData[entry.name]}
             name={entry.name}
             // onChange={(e) => onInputChange(entry.name, e.target.value)}/>
             onChange={onInputChange.bind(null, entry.name)}/>
-          <div>
-            {props.errors[entry.name]}
-          </div>
+
+            {
+              props.errors[entry.name] &&
+              <div className={sc('error')}>
+                {props.errors[entry.name]}
+              </div>
+            }
         </div>
       )}
       <div>

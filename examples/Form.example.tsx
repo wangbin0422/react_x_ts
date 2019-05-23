@@ -10,8 +10,8 @@ export default function () {
   });
 
   const [fields] = useState([
-    {name: 'username', label: '用户名', input: {type: 'text'}},
-    {name: 'password', label: '密码', input: {type: 'password'}}
+    {name: 'username', label: '用户名',labelWidth: '3em', input: {type: 'text'}},
+    {name: 'password', label: '密码',labelWidth: '3em', input: {type: 'password'}}
   ]);
 
   const [errors, setErrors] = useState({});
@@ -25,6 +25,7 @@ export default function () {
     ];
     const errors = Vaildator(formData, rules);
     if (noErrors(errors)) {
+      console.log(errors);
       // no error
     } else {
       setErrors(errors);
@@ -45,13 +46,9 @@ export default function () {
               level="primary">
               提交
             </Button>
-            <Button>返回</Button>
           </Fragment>
         }
         errors={errors}/>
-
     </div>
-
-
   );
 }

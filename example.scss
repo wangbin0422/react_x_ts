@@ -47,6 +47,11 @@ $main-color: #1890ff;
  padding: 16px 20px 0;
 }
 .site-footer {
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ background-color: #fff;
  font-size: 12px;
  text-align: center;
  color: #666;

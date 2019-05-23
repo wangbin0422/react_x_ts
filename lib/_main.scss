@@ -1,3 +1,29 @@
 $main-color: #1890ff;
 $text-color: #333;
 $border-color: lighten($text-color, 40%);
+
+$font-size: 14px;
+$font-size-small: 12px;
+$font-size-big: 20px;
+
+$colors: (
+  red: #f1453d,
+  green: #8cc152,
+  blue: #0086e6,
+  black: #424242,
+  white: #ffffff,
+  grey: #ababab,
+);
+
+$blue: map_get($colors, blue);
+$red: map_get($colors, red);
+$green: map_get($colors, green);
+$black: map_get($colors, black);
+$white: map_get($colors, white);
+$grey: map_get($colors, grey);
+
+$input-height: 32px;
+$input-height-small: 24px;
+$input-height-big: 48px;
+$input-border-color: lighten($text-color, 40%);
+$input-border-radius: 4px;

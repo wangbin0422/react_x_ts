@@ -1,0 +1,18 @@
+@import "../_main";
+
+.ui-form {
+  &-row {
+    margin: 8px 0;
+    &:first-child {margin-top: 0}
+    &:last-child {margin-bottom: 0}
+  }
+  &-label {
+    display: inline-block;
+    margin-right: 8px;
+    text-align: right;
+  }
+  &-error {
+    font-style: $font-size-small;
+    color: $red;
+  }
+}
