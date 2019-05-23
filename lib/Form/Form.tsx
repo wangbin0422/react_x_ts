@@ -1,4 +1,4 @@
-import React, {ReactFragment} from 'react';
+import React, {FormEvent, ReactFragment} from 'react';
 import {scopedClassMaker} from '../untils/classes';
 import Input from '../Input/Input'
 import './form.scss'
@@ -10,11 +10,12 @@ export interface FormValue {
 const sc = scopedClassMaker('ui-form');
 
 interface IProps {
+  layout?: 'vertical' | 'horizontal' | 'inline';
   value: FormValue;
   // fields: Array<{ name: string, label: string,labelWidth: string, input: { type: string} }>;
   fields: FormField[];
   buttons: ReactFragment;
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  onSubmit: (value: FormValue) => void;
   onChange: (value: FormValue) => void;
   errors: {[K: string]: string[]}
 }
@@ -32,10 +33,7 @@ export interface FormField {
 
 const Form: React.FunctionComponent<IProps> = (props) => {
   const formData  = props.value;
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    props.onSubmit(e);
-  };
+
   const onInputChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormVal = {...formData, [name]: e.target.value};
     props.onChange(newFormVal);
@@ -49,27 +47,75 @@ const Form: React.FunctionComponent<IProps> = (props) => {
         // onChange={(e) => onInputChange(entry.name, e.target.value)}/>
         onChange={onInputChange.bind(null, field.name)}/>
     </div>;
-  return (
-    <form onSubmit={onSubmit}>
+
+  const verticalLayout = <div>
+    {props.fields.map((entry, idx) =>
+      <div key={idx} className={sc('row')}>
+        <label className={sc('label')} style={{width: `${entry.labelWidth}em`}}>{entry.label}</label>
+        {renderInput(entry)}
+        {
+          Object.keys(props.errors).length !== 0 ?
+            <div className={sc('error')}>
+              <span>{props.errors[entry.name]}</span>
+            </div>
+            :
+            null
+        }
+      </div>
+    )}
+    <div>
+      {props.buttons}
+    </div>
+  </div>;
+
+  const horizontalLayout = (
+    <table className={sc('table')}>
+      <tbody>
       {props.fields.map((entry, idx) =>
-        <div key={idx} className={sc('row')}>
-          <label className={sc('label')} style={{width: `${entry.labelWidth}em`}}>{entry.label}</label>
+        <tr key={idx} className={sc('tr')}>
+          <td className={sc('td')}>
+            <div className={sc('label')}>{entry.label}</div>
+          </td>
+          <td className={sc('td')}>
             {renderInput(entry)}
-            {
-              Object.keys(props.errors).length !== 0 ?
-              <div className={sc('error')}>
-                <span style={{marginLeft: `${entry.labelWidth!+0.5}em`}}>{props.errors[entry.name]}</span>
-              </div>
+          </td>
+          <td className={sc('td')}>
+            {Object.keys(props.errors).length !== 0 ?
+              <div className={sc('error')}>{props.errors[entry.name]}</div>
               :
               null
             }
-        </div>
+          </td>
+        </tr>
       )}
-      <div>
-        {props.buttons}
-      </div>
-    </form>
+        <tr>
+          <td className={sc('td')}></td>
+          <td className={sc('td')} colSpan={2}>
+            <div>
+              {props.buttons}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    props.onSubmit(formData);
+  };
+  return (
+    <div>
+      <form onSubmit={onSubmit} className={sc('')}>
+        {props.layout === 'horizontal' ?
+          horizontalLayout :
+          verticalLayout
+        }
+      </form>
+
+    </div>
   );
 };
-
+Form.defaultProps = {
+  layout: 'horizontal'
+};
 export default Form;

@@ -23,33 +23,54 @@ export default function () {
     {key: 'password', required: true}
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = () =>{
     const errors = Vaildator(formData, rules);
     setErrors(errors);
   };
   const onChange = (formData: FormValue) => {
     setFormData(formData);
-    // const errors = Vaildator(formData, rules);
-    // setErrors(errors);
+    const errors = Vaildator(formData, rules);
+    setErrors(errors);
   };
 
   return (
     <div>
-      <Form
-        value={formData}
-        fields={fields}
-        onSubmit={handleSubmit}
-        onChange={onChange}
-        buttons={
-          <Fragment>
-            <Button
-              type="submit"
-              level="primary">
-              提交
-            </Button>
-          </Fragment>
-        }
-        errors={errors}/>
+      <h2>示例1</h2>
+      <div style={{padding: '8px 0'}}>
+        <Form
+          value={formData}
+          fields={fields}
+          onSubmit={handleSubmit}
+          onChange={onChange}
+          buttons={
+            <Fragment>
+              <Button
+                type="submit"
+                level="primary">
+                提交
+              </Button>
+            </Fragment>
+          }
+          errors={errors}>
+        </Form>
+      </div>
+      <br/>
+      <h2>示例2</h2>
+      <div style={{padding: '8px 0'}}>
+        <Form
+          layout="vertical"
+          value={formData}
+          fields={fields}
+          onSubmit={handleSubmit}
+          onChange={onChange}
+          buttons={
+            <Fragment>
+              <Button type="submit" level="primary">提交</Button>
+            </Fragment>
+          }
+          errors={errors}>
+        </Form>
+      </div>
     </div>
   );
 }
