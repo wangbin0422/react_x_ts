@@ -1,4 +1,4 @@
-import React, {FormEvent, ReactFragment} from 'react';
+import React, {ReactFragment} from 'react';
 import {scopedClassMaker} from '../untils/classes';
 import Input from '../Input/Input'
 import './form.scss'
@@ -15,7 +15,7 @@ interface IProps {
   // fields: Array<{ name: string, label: string,labelWidth: string, input: { type: string} }>;
   fields: FormField[];
   buttons: ReactFragment;
-  onSubmit: (value: FormValue) => void;
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
   onChange: (value: FormValue) => void;
   errors: {[K: string]: string[]}
 }
@@ -33,7 +33,10 @@ export interface FormField {
 
 const Form: React.FunctionComponent<IProps> = (props) => {
   const formData  = props.value;
-
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    props.onSubmit(e);
+  };
   const onInputChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormVal = {...formData, [name]: e.target.value};
     props.onChange(newFormVal);
@@ -99,10 +102,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
       </tbody>
     </table>
   );
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    props.onSubmit(formData);
-  };
+
   return (
     <div>
       <form onSubmit={onSubmit} className={sc('')}>
