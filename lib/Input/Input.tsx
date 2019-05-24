@@ -30,6 +30,7 @@ const Input: React.FunctionComponent<IProps> = (props) => {
     </div>
   );
 };
+
 Input.defaultProps = {
   type: 'text'
 };
