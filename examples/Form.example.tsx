@@ -4,14 +4,25 @@ import Vaildator from '../lib/Form/validator';
 import Button from '../lib/Button/Button';
 
 export default function () {
+  const name = ['wang', 'bin', 'mio'];
+  const checkUserName = (username: string, succeed: () => void, fail: () => void) => {
+    setTimeout(() => {
+      console.log(username);
+      if (name.indexOf(username) >= 0) {
+        succeed();
+      } else {
+        fail();
+      }
+    }, 2000);
+  };
   const [formData, setFormData] = useState<FormValue>({
     username: '',
     password: ''
   });
 
   const [fields] = useState<FormField[]>([
-    {name: 'username', label: '用户名',labelWidth: 3, input: {type: 'text'}},
-    {name: 'password', label: '密码',labelWidth: 3, input: {type: 'password'}}
+    {name: 'username', label: '用户名', labelWidth: 3, input: {type: 'text'}},
+    {name: 'password', label: '密码', labelWidth: 3, input: {type: 'password'}}
   ]);
 
   const [errors, setErrors] = useState({});
@@ -20,17 +31,32 @@ export default function () {
     {key: 'username', required: true},
     {key: 'username', minLength: 8, maxLength: 16},
     {key: 'username', pattern: /^[A-Za-z0-9]+$/},
+    {
+      key: 'username', validateor: {
+        name: 'unique',
+        validate(name: string) {
+            return new Promise<void>((resolve, reject) => {
+              checkUserName(name, resolve, reject);
+            });
+        }
+      }
+    },
     {key: 'password', required: true}
   ];
 
-  const handleSubmit = () =>{
-    const errors = Vaildator(formData, rules);
-    setErrors(errors);
+  const handleSubmit = () => {
+    Vaildator(formData, rules, (errors) => {
+      console.log(errors);
+      setErrors(errors);
+    })
+
   };
   const onChange = (formData: FormValue) => {
     setFormData(formData);
-    const errors = Vaildator(formData, rules);
-    setErrors(errors);
+    Vaildator(formData, rules, (errors) => {
+      console.log(errors);
+      setErrors(errors);
+    })
   };
 
   return (

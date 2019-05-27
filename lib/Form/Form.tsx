@@ -57,9 +57,9 @@ const Form: React.FunctionComponent<IProps> = (props) => {
         <label className={sc('label')} style={{width: `${entry.labelWidth}em`}}>{entry.label}</label>
         {renderInput(entry)}
         {
-          Object.keys(props.errors).length !== 0 ?
+          props.errors[entry.name] ?
             <div className={sc('error')}>
-              <span>{props.errors[entry.name]}</span>
+              <span>{props.errors[entry.name][0]}</span>
             </div>
             :
             null
@@ -83,8 +83,8 @@ const Form: React.FunctionComponent<IProps> = (props) => {
             {renderInput(entry)}
           </td>
           <td className={sc('td')}>
-            {Object.keys(props.errors).length !== 0 ?
-              <div className={sc('error')}>{props.errors[entry.name]}</div>
+            {props.errors[entry.name] ?
+              <div className={sc('error')}>{props.errors[entry.name][0]}</div>
               :
               null
             }
