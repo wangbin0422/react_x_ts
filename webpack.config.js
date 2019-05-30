@@ -4,7 +4,8 @@ module.exports = {
     index: './lib/index.tsx',
   },
   output: {
-    path: path.resolve(__dirname, 'dist/lib'), library: 'WUI',
+    path: path.resolve(__dirname, 'dist/lib'),
+    library: 'WUI',
     libraryTarget: 'umd'
   },
   resolve: {
