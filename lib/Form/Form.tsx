@@ -17,7 +17,8 @@ interface IProps {
   buttons: ReactFragment;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   onChange: (value: FormValue) => void;
-  errors: {[K: string]: string[]}
+  errors: {[K: string]: string[]};
+  transformError?: (message: string) => string
 }
 
 interface FormFieldDefaultRender {
@@ -31,6 +32,10 @@ export interface FormField {
   input: FormFieldDefaultRender
 }
 
+export interface ErrorMessage {
+  [key: string]: string
+}
+
 const Form: React.FunctionComponent<IProps> = (props) => {
   const formData  = props.value;
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -40,6 +45,16 @@ const Form: React.FunctionComponent<IProps> = (props) => {
   const onInputChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormVal = {...formData, [name]: e.target.value};
     props.onChange(newFormVal);
+  };
+  const transformError = (message: string) => {
+    const dict: ErrorMessage = {
+      required: '必填',
+      minLength: '太短',
+      maxLength: '太长',
+      pattern: '格式错误'
+    };
+    return props.transformError && props.transformError(message) ||
+      dict[message] || '未知错误'
   };
   const renderInput = (field: FormField) =>
     <div className={sc('input-wrapper')} key={field.name}>
@@ -57,9 +72,9 @@ const Form: React.FunctionComponent<IProps> = (props) => {
         <label className={sc('label')} style={{width: `${entry.labelWidth}em`}}>{entry.label}</label>
         {renderInput(entry)}
         {
-          props.errors[entry.name] ?
+          (props.errors[entry.name]) ?
             <div className={sc('error')}>
-              <span>{props.errors[entry.name][0]}</span>
+              <span>{transformError!(props.errors[entry.name][0])}</span>
             </div>
             :
             null
@@ -84,7 +99,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
           </td>
           <td className={sc('td')}>
             {props.errors[entry.name] ?
-              <div className={sc('error')}>{props.errors[entry.name][0]}</div>
+              <div className={sc('error')}>{transformError(props.errors[entry.name][0])}</div>
               :
               null
             }
@@ -116,6 +131,6 @@ const Form: React.FunctionComponent<IProps> = (props) => {
   );
 };
 Form.defaultProps = {
-  layout: 'horizontal'
+  layout: 'horizontal',
 };
 export default Form;

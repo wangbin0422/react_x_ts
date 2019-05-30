@@ -1,13 +1,12 @@
 import React, {useState, Fragment} from 'react';
-import Form, {FormValue, FormField} from './../lib/Form/Form';
+import Form, {FormValue, FormField, ErrorMessage} from './../lib/Form/Form';
 import Vaildator from '../lib/Form/validator';
 import Button from '../lib/Button/Button';
 
 export default function () {
-  const name = ['wang', 'bin', 'mio'];
+  const name = ['wangwang', 'bin', 'mio'];
   const checkUserName = (username: string, succeed: () => void, fail: () => void) => {
     setTimeout(() => {
-      console.log(username);
       if (name.indexOf(username) >= 0) {
         succeed();
       } else {
@@ -35,28 +34,33 @@ export default function () {
       key: 'username', validateor: {
         name: 'unique',
         validate(name: string) {
-            return new Promise<void>((resolve, reject) => {
-              checkUserName(name, resolve, reject);
-            });
+          return new Promise<void>((resolve, reject) => {
+            checkUserName(name, resolve, reject);
+          });
         }
       }
     },
     {key: 'password', required: true}
   ];
-
+  const transformError = (message: string) => {
+    const dict: ErrorMessage = {
+      unique: '用户名已存在'
+    };
+    return dict[message];
+  };
   const handleSubmit = () => {
     Vaildator(formData, rules, (errors) => {
-      console.log(errors);
+      // console.log(errors);
       setErrors(errors);
-    })
+    });
 
   };
   const onChange = (formData: FormValue) => {
     setFormData(formData);
     Vaildator(formData, rules, (errors) => {
-      console.log(errors);
+      // console.log(errors);
       setErrors(errors);
-    })
+    });
   };
 
   return (
@@ -77,7 +81,8 @@ export default function () {
               </Button>
             </Fragment>
           }
-          errors={errors}>
+          errors={errors}
+          transformError={transformError}>
         </Form>
       </div>
       <br/>
@@ -94,7 +99,8 @@ export default function () {
               <Button type="submit" level="primary">提交</Button>
             </Fragment>
           }
-          errors={errors}>
+          errors={errors}
+          transformError={transformError}>
         </Form>
       </div>
     </div>

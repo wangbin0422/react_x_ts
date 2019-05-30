@@ -42,39 +42,31 @@ const Vaildator = (formValue: FormValue, rules: FormRules, callback: (errors: an
   rules.map(rules => {
     const _value = formValue[rules.key];
     if (rules.required && isEmpty(_value)) {
-      errorsList(rules.key, {message: '必填'});
+      errorsList(rules.key, {message: 'required'});
     }
     if (rules.validateor) {
       const promise = rules.validateor.validate(_value);
-      errorsList(rules.key, {message: '已存在', promise});
+      errorsList(rules.key, {message: rules.validateor.name, promise});
     }
     if (rules.minLength && !isEmpty(_value) && _value!.length < rules.minLength) {
-      errorsList(rules.key, {message: '长度过短'});
+      errorsList(rules.key, {message: 'minLength'});
     }
     if (rules.maxLength && !isEmpty(_value) && _value!.length > rules.maxLength) {
-      errorsList(rules.key, {message: '长度过长'});
+      errorsList(rules.key, {message: 'maxLength'});
     }
     if (!isEmpty(_value) && rules.pattern && !rules.pattern.test(_value)) {
-      errorsList(rules.key, {message: '信息有误'});
+      errorsList(rules.key, {message: 'pattern'});
     }
   });
-  console.log(flat(Object.values(errors)));
   const promiseList = flat(Object.values(errors))
     .filter(entry => entry.promise)
     .map(entry => entry.promise);
-  Promise.all(promiseList).then(() => {
-    const newErrors = fromEntries(
-      Object.keys(errors).map(key =>
-        [key, errors[key].map((entry: OneError) => entry.message)]
-      ));
-    callback(newErrors);
-  }, () => {
-    const newErrors = fromEntries(
-      Object.keys(errors).map(key =>
-        [key, errors[key].map((entry: OneError) => entry.message)]
-      ));
-    console.log(newErrors);
-    callback(newErrors);
+  Promise.all(promiseList).finally(() => {
+    callback(
+      fromEntries(
+        Object.keys(errors).map(key =>
+          [key, errors[key].map((entry: OneError) => entry.message)]
+        )));
   });
 };
 
