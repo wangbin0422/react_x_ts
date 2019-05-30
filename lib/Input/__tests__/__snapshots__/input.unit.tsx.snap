@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input prop error = wrong 1`] = `
+<div
+  className="ui-input-wrapper"
+>
+  <input
+    className="ui-input"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+    type="text"
+  />
+  <span
+    className="ui-input-error"
+  >
+    wrong
+  </span>
+</div>
+`;
+
+exports[`Input prop label = hello 1`] = `
+<div
+  className="ui-input-wrapper"
+>
+  <label
+    className="ui-input-label"
+    style={
+      Object {
+        "display": "inline-block",
+      }
+    }
+  >
+    hello
+  </label>
+  <input
+    className="ui-input"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+    type="text"
+  />
+</div>
+`;
+
+exports[`Input prop labelPosition = top 1`] = `
+<div
+  className="ui-input-wrapper"
+>
+  <label
+    className="ui-input-label"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    hello
+  </label>
+  <input
+    className="ui-input"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+    type="text"
+  />
+</div>
+`;
