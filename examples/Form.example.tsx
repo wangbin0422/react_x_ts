@@ -1,16 +1,16 @@
 import React, {useState, Fragment} from 'react';
 import Form, {FormValue, FormField, ErrorMessage} from './../lib/Form/Form';
-import Vaildator from '../lib/Form/validator';
+import Vaildator, {noErrors} from '../lib/Form/validator';
 import Button from '../lib/Button/Button';
 
 export default function () {
-  const name = ['wangwang', 'bin', 'mio'];
-  const checkUserName = (username: string, succeed: () => void, fail: () => void) => {
+  const name = ['wang', 'mio', 'jessie'];
+  const checkUserName = (username: string, key: string, succeed: () => void, fail: (key: string) => void) => {
     setTimeout(() => {
       if (name.indexOf(username) >= 0) {
         succeed();
       } else {
-        fail();
+        fail(key);
       }
     }, 2000);
   };
@@ -28,14 +28,14 @@ export default function () {
 
   const rules = [
     {key: 'username', required: true},
-    {key: 'username', minLength: 8, maxLength: 16},
+    {key: 'username', minLength: 6, maxLength: 16},
     {key: 'username', pattern: /^[A-Za-z0-9]+$/},
     {
       key: 'username', validateor: {
         name: 'unique',
-        validate(name: string) {
+        validate(username: string, name: string) {
           return new Promise<void>((resolve, reject) => {
-            checkUserName(name, resolve, reject);
+            checkUserName(username,name, resolve, reject);
           });
         }
       }
@@ -50,16 +50,25 @@ export default function () {
   };
   const handleSubmit = () => {
     Vaildator(formData, rules, (errors) => {
-      // console.log(errors);
-      setErrors(errors);
+      if (noErrors(errors)) {
+        setErrors({})
+        console.log(formData);
+      } else {
+        setErrors(errors);
+      }
     });
 
   };
   const onChange = (formData: FormValue) => {
     setFormData(formData);
     Vaildator(formData, rules, (errors) => {
-      // console.log(errors);
-      setErrors(errors);
+      if (noErrors(errors)) {
+        console.log(formData);
+        setErrors({})
+      } else {
+        // console.log(errors);
+        setErrors(errors);
+      }
     });
   };
 

@@ -8,7 +8,7 @@ interface FormRule {
   pattern?: RegExp;
   validateor?: {
     name: string,
-    validate: (name: string) => Promise<void>
+    validate: (name: string, key: string) => Promise<void>
   }
 }
 
@@ -44,10 +44,6 @@ const Vaildator = (formValue: FormValue, rules: FormRules, callback: (errors: an
     if (rules.required && isEmpty(_value)) {
       errorsList(rules.key, {message: 'required'});
     }
-    if (rules.validateor) {
-      const promise = rules.validateor.validate(_value);
-      errorsList(rules.key, {message: rules.validateor.name, promise});
-    }
     if (rules.minLength && !isEmpty(_value) && _value!.length < rules.minLength) {
       errorsList(rules.key, {message: 'minLength'});
     }
@@ -57,11 +53,25 @@ const Vaildator = (formValue: FormValue, rules: FormRules, callback: (errors: an
     if (!isEmpty(_value) && rules.pattern && !rules.pattern.test(_value)) {
       errorsList(rules.key, {message: 'pattern'});
     }
+    if (rules.validateor) {
+      const promise = rules.validateor.validate(_value, rules.key);
+      errorsList(rules.key, {message: rules.validateor.name, promise});
+    }
   });
+  console.log(errors);
   const promiseList = flat(Object.values(errors))
     .filter(entry => entry.promise)
     .map(entry => entry.promise);
-  Promise.all(promiseList).finally(() => {
+  console.log(promiseList);
+  Promise.all(promiseList).then(() => {
+    callback(
+      fromEntries(
+        Object.keys(errors).map(key =>
+          [key, errors[key].map((entry: OneError) => entry.message)]
+        )));
+
+  }, (error) => {
+    delete errors[error]; //todo
     callback(
       fromEntries(
         Object.keys(errors).map(key =>
