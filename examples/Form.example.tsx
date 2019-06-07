@@ -5,12 +5,12 @@ import Button from '../lib/Button/Button';
 
 export default function () {
   const name = ['wang', 'mio', 'jessie'];
-  const checkUserName = (username: string, key: string, succeed: () => void, fail: (key: string) => void) => {
+  const checkUserName = (username: string, succeed: () => void, fail: () => void) => {
     setTimeout(() => {
       if (name.indexOf(username) >= 0) {
         succeed();
       } else {
-        fail(key);
+        fail();
       }
     }, 2000);
   };
@@ -24,23 +24,21 @@ export default function () {
     {name: 'password', label: '密码', labelWidth: 3, input: {type: 'password'}}
   ]);
 
+  const validateor = (username: string) => {
+    return new Promise<string>((resolve, reject) => {
+      checkUserName(username, resolve, () => reject('unique'));
+    });
+  };
+
   const [errors, setErrors] = useState({});
 
   const rules = [
     {key: 'username', required: true},
     {key: 'username', minLength: 6, maxLength: 16},
     {key: 'username', pattern: /^[A-Za-z0-9]+$/},
-    {
-      key: 'username', validateor: {
-        name: 'unique',
-        validate(username: string, name: string) {
-          return new Promise<void>((resolve, reject) => {
-            checkUserName(username,name, resolve, reject);
-          });
-        }
-      }
-    },
-    {key: 'password', required: true}
+    {key: 'username', validateor},
+    {key: 'password', required: true},
+    // {key: 'password', validateor}
   ];
   const transformError = (message: string) => {
     const dict: ErrorMessage = {
@@ -51,7 +49,7 @@ export default function () {
   const handleSubmit = () => {
     Vaildator(formData, rules, (errors) => {
       if (noErrors(errors)) {
-        setErrors({})
+        setErrors({});
         console.log(formData);
       } else {
         setErrors(errors);
@@ -61,15 +59,15 @@ export default function () {
   };
   const onChange = (formData: FormValue) => {
     setFormData(formData);
-    Vaildator(formData, rules, (errors) => {
-      if (noErrors(errors)) {
-        console.log(formData);
-        setErrors({})
-      } else {
-        // console.log(errors);
-        setErrors(errors);
-      }
-    });
+    // Vaildator(formData, rules, (errors) => {
+    //   if (noErrors(errors)) {
+    //     console.log(formData);
+    //     setErrors({});
+    //   } else {
+    //     // console.log(errors);
+    //     setErrors(errors);
+    //   }
+    // });
   };
 
   return (
