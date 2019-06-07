@@ -8,9 +8,9 @@ export default function () {
   const checkUserName = (username: string, succeed: () => void, fail: () => void) => {
     setTimeout(() => {
       if (name.indexOf(username) >= 0) {
-        succeed();
-      } else {
         fail();
+      } else {
+        succeed();
       }
     }, 2000);
   };
