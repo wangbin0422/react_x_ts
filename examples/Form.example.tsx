@@ -12,7 +12,7 @@ export default function () {
       } else {
         succeed();
       }
-    }, 2000);
+    }, 6000);
   };
   const [formData, setFormData] = useState<FormValue>({
     username: '',

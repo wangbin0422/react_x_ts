@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
+import {HashRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom';
 import IconDemo from './examples/Icon.demo';
 import InputExample from './examples/Input.example';
 import ButtonExample from './examples/Button.example';
@@ -49,13 +49,16 @@ ReactDOM.render((
           </ul>
         </Aside>
         <Content className="site-main">
-          <Route path="/icon" component={IconDemo}></Route>
-          <Route path="/button" component={ButtonExample}></Route>
-          <Route path="/dialog" component={DialogExample}></Route>
-          <Route path="/layout" component={LayoutExample}></Route>
-          <Route path="/form" component={FormExample}></Route>
-          <Route path="/input" component={InputExample}></Route>
-          <Route path='/scroll' component={ScrollExample}></Route>
+          <Switch>
+            <Route path="/icon" component={IconDemo}></Route>
+            <Route path="/button" component={ButtonExample}></Route>
+            <Route path="/dialog" component={DialogExample}></Route>
+            <Route path="/layout" component={LayoutExample}></Route>
+            <Route path="/form" component={FormExample}></Route>
+            <Route path="/input" component={InputExample}></Route>
+            <Route path='/scroll' component={ScrollExample}></Route>
+            <Redirect to="/icon"></Redirect>
+          </Switch>
         </Content>
       </Layout>
       <Footer className="site-footer">

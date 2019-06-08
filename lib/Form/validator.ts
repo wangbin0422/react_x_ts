@@ -52,20 +52,19 @@ const Vaildator = (formValue: FormValue, rules: FormRules, callback: (errors: an
     }
   });
   const x = Object.keys(errors).map(key =>
-    errors[key].map((promise: any) => [key, promise])
+    errors[key].map((entry: any) => [key, entry])
   );
   const y = flat(x);
   console.log(y);
 
   const z = y.map(([key, promiseOrStr]) => (
-    promiseOrStr instanceof Promise ? promiseOrStr : Promise.reject(promiseOrStr)
-  ).then(() => {
-    return [key, undefined];
-  }, (reason: any) => {
-    return [key, reason];
-  }));
-  console.log(z);
+    promiseOrStr instanceof Promise ?
+      promiseOrStr :
+      Promise.reject(promiseOrStr) //字符串改为Promise处理
+  ).then(() => [key, undefined],
+      (reason: any) => [key, reason]));
   Promise.all(z).then((res: Array<[string, string[]]>) => {
+    console.log(res);
     callback(zip(res.filter(entry => entry[1])))
   });
 };
