@@ -104,7 +104,8 @@ const confirm = (content: string, onYes?: () => void, onNo?: () => void) => {
   const buttons = [
     <Button
       level="primary"
-      onClick={handleYes}>yes</Button>,
+      onClick={handleYes}
+    >yes</Button>,
     <Button onClick={handleNo}>no</Button>
   ];
 

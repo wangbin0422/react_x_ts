@@ -27,7 +27,7 @@ export default function() {
               <Button
                 level="primary"
                 onClick={() => setVisible(false)}>ok</Button>,
-              <Button>cancel</Button>
+              <Button onClick={() => setVisible(false)}>cancel</Button>
             ]
           }
           onClose={() => {setVisible(false)}}>

@@ -16,7 +16,6 @@ import Footer from './lib/Layout/Footer';
 
 import './example.scss'
 
-
 ReactDOM.render((
   <Router>
     <Layout className="site-page">
