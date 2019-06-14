@@ -43,11 +43,11 @@ class Pager extends React.Component<IProps, IState> {
     }
   }
 
-  onClickItem(value: number, e: React.MouseEvent<HTMLSpanElement>) {
+  onClickItem = (value: number, e: React.MouseEvent<HTMLSpanElement>) => {
     if (value <= this.props.total && value >= 1) {
       this.current = value;
     }
-  }
+  };
 
   jumpPage = (index: number) => {
     const prev = this.current - 5 <= 0 ? 1 : this.current - 5;
