@@ -77,7 +77,7 @@ class Pager extends React.Component<IProps, IState> {
         </span> :
         <button
           key={idx}
-          className={sc('item')}
+          className={sc({'item': true, 'active': entry === this.current})}
           onClick={e => this.onClickItem(entry, e)}
         >
           {entry}

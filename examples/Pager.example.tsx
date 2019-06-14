@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Pager from '../lib/Pager/Pager';
 
 export default function () {
-  const [page, setPage] = useState(5);
+  const [page, setPage] = useState(1);
   return (
     <div>
       <h2>示例</h2>
