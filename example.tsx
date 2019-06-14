@@ -8,6 +8,7 @@ import DialogExample from './examples/Dialog.example';
 import LayoutExample from './examples/Layout.example';
 import FormExample from './examples/Form.example'
 import ScrollExample from './examples/Scroll.example';
+import PagerExample from './examples/Pager.example'
 import Content from './lib/Layout/Content';
 import Aside from './lib/Layout/Aside';
 import Header from './lib/Layout/Header';
@@ -45,6 +46,9 @@ ReactDOM.render((
             <li>
               <NavLink to="/scroll">Scroll</NavLink>
             </li>
+            <li>
+              <NavLink to="/pager">Pager</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
@@ -56,6 +60,7 @@ ReactDOM.render((
             <Route path="/form" component={FormExample}></Route>
             <Route path="/input" component={InputExample}></Route>
             <Route path='/scroll' component={ScrollExample}></Route>
+            <Route path='/pager' component={PagerExample}></Route>
             <Redirect to="/icon"></Redirect>
           </Switch>
         </Content>

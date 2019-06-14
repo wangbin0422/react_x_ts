@@ -1,0 +1,28 @@
+@import "../_main";
+%item {
+  height: $input-height;
+  width: $input-height;
+  border: 1px solid $input-border-color;
+  background: none;
+  border-radius: $input-border-radius;
+  margin: 0 4px;
+  vertical-align: center;
+}
+%center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.ui-pager {
+  display: flex;
+  margin: 8px 0;
+  &-item {
+    @extend %item;
+  }
+  &-prev {
+    @extend %item; @extend %center
+  }
+  &-next {
+    @extend %item; @extend %center
+  }
+}
