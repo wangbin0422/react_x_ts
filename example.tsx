@@ -6,16 +6,17 @@ import InputExample from './examples/Input.example';
 import ButtonExample from './examples/Button.example';
 import DialogExample from './examples/Dialog.example';
 import LayoutExample from './examples/Layout.example';
-import FormExample from './examples/Form.example'
+import FormExample from './examples/Form.example';
 import ScrollExample from './examples/Scroll.example';
-import PagerExample from './examples/Pager.example'
+import PagerExample from './examples/Pager.example';
+import BlankExample from './examples/ClickOutSide.example';
 import Content from './lib/Layout/Content';
 import Aside from './lib/Layout/Aside';
 import Header from './lib/Layout/Header';
 import Layout from './lib/Layout/Layout';
 import Footer from './lib/Layout/Footer';
 
-import './example.scss'
+import './example.scss';
 
 ReactDOM.render((
   <Router>
@@ -49,6 +50,9 @@ ReactDOM.render((
             <li>
               <NavLink to="/pager">Pager</NavLink>
             </li>
+            <li>
+              <NavLink to="/blank">ClickOutSide</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
@@ -61,6 +65,7 @@ ReactDOM.render((
             <Route path="/input" component={InputExample}></Route>
             <Route path='/scroll' component={ScrollExample}></Route>
             <Route path='/pager' component={PagerExample}></Route>
+            <Route path='/blank' component={BlankExample}></Route>
             <Redirect to="/icon"></Redirect>
           </Switch>
         </Content>
