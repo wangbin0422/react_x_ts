@@ -17,7 +17,7 @@ interface IProps {
   current?: number;
   total: number;
   defaultCurrent?: number;
-  onChange: (value: number) => void
+  onChange?: (value: number) => void
 }
 
 interface IState {
