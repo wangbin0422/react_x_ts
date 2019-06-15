@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pager prop current = 1 1`] = `
+<div
+  className="ui-pager"
+>
+  <button
+    className="ui-pager-prev"
+    onClick={[Function]}
+  >
+    <svg
+      className="ui-icon"
+    >
+      <use
+        xlinkHref="#left"
+      />
+    </svg>
+  </button>
+  <button
+    className="ui-pager-item ui-pager-active"
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    2
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    3
+  </button>
+  <button
+    className="ui-pager-next"
+    onClick={[Function]}
+  >
+    <svg
+      className="ui-icon"
+    >
+      <use
+        xlinkHref="#right"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`Pager prop total = 5 1`] = `
+<div
+  className="ui-pager"
+>
+  <button
+    className="ui-pager-prev"
+    onClick={[Function]}
+  >
+    <svg
+      className="ui-icon"
+    >
+      <use
+        xlinkHref="#left"
+      />
+    </svg>
+  </button>
+  <button
+    className="ui-pager-item ui-pager-active"
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    2
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    3
+  </button>
+  <span
+    onClick={[Function]}
+  >
+    ...
+  </span>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    5
+  </button>
+  <button
+    className="ui-pager-next"
+    onClick={[Function]}
+  >
+    <svg
+      className="ui-icon"
+    >
+      <use
+        xlinkHref="#right"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`Pager 应该有两个省略号 1`] = `
+<div
+  className="ui-pager"
+>
+  <button
+    className="ui-pager-prev"
+    onClick={[Function]}
+  >
+    <svg
+      className="ui-icon"
+    >
+      <use
+        xlinkHref="#left"
+      />
+    </svg>
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    2
+  </button>
+  <span
+    onClick={[Function]}
+  >
+    ...
+  </span>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    4
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    5
+  </button>
+  <button
+    className="ui-pager-item ui-pager-active"
+    onClick={[Function]}
+  >
+    6
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    7
+  </button>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    8
+  </button>
+  <span
+    onClick={[Function]}
+  >
+    ...
+  </span>
+  <button
+    className="ui-pager-item"
+    onClick={[Function]}
+  >
+    20
+  </button>
+  <button
+    className="ui-pager-next"
+    onClick={[Function]}
+  >
+    <svg
+      className="ui-icon"
+    >
+      <use
+        xlinkHref="#right"
+      />
+    </svg>
+  </button>
+</div>
+`;
