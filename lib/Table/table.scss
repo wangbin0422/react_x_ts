@@ -1,0 +1,25 @@
+@import "../_main";
+.ui-table {
+  width: 100%;
+  border-collapse: collapse;
+  $border-color: lighten($grey, 25%);
+  &-header {
+    text-align: left;
+    font-weight: normal;
+    padding: 8px;
+    border-bottom: 1px solid $border-color;
+    box-sizing: content-box;
+  }
+  &-td {
+    padding: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  > thead {
+    background: lighten($grey, 29%);
+  }
+  &-empty {
+    padding: 1em;
+    text-align: center;
+    border: 1px solid $border-color;
+  }
+}
