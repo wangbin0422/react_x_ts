@@ -1,4 +1,5 @@
 import {FormValue} from './Form';
+
 interface FormRule {
   key: string;
   required?: boolean;
@@ -25,7 +26,7 @@ export function noErrors(errors: any) {
 type OneError = string | Promise<string>
 
 const Vaildator = (formValue: FormValue, rules: FormRules, callback: (errors: any) => void) => {
-  let errors: any = {};
+  let errors: { [key: string]: OneError[] } = {};
   const errorsList = (key: string, error: OneError) => {
     if (errors[key] === undefined) {
       errors[key] = [];
@@ -35,60 +36,69 @@ const Vaildator = (formValue: FormValue, rules: FormRules, callback: (errors: an
   rules.map(rules => {
     const _value = formValue[rules.key];
     if (rules.required && isEmpty(_value)) {
-      errorsList(rules.key,'required');
+      errorsList(rules.key, 'required');
     }
     if (rules.minLength && !isEmpty(_value) && _value!.length < rules.minLength) {
-      errorsList(rules.key,'minLength');
+      errorsList(rules.key, 'minLength');
     }
     if (rules.maxLength && !isEmpty(_value) && _value!.length > rules.maxLength) {
-      errorsList(rules.key,'maxLength');
+      errorsList(rules.key, 'maxLength');
     }
     if (!isEmpty(_value) && rules.pattern && !rules.pattern.test(_value)) {
-      errorsList(rules.key,'pattern');
+      errorsList(rules.key, 'pattern');
     }
     if (rules.validateor) {
       const promise = rules.validateor(_value);
-      errorsList(rules.key,promise);
+      errorsList(rules.key, promise);
     }
   });
-  const x = Object.keys(errors).map(key =>
-    errors[key].map((entry: any) => [key, entry])
-  );
-  const y = flat(x);
-  console.log(y);
+  // const flattenErrors = flat<[string, OneError]>(
+  //   Object.keys(errors).map<[string, OneError][]>(key =>
+  //     errors[key].map<[string, OneError]>(error => [key, error])));
 
-  const z = y.map(([key, promiseOrStr]) => (
-    promiseOrStr instanceof Promise ?
-      promiseOrStr :
-      Promise.reject(promiseOrStr) //字符串改为Promise处理
-  ).then(() => [key, undefined],
-      (reason: any) => [key, reason]));
-  Promise.all(z).then((res: Array<[string, string[]]>) => {
-    console.log(res);
-    callback(zip(res.filter(entry => entry[1])))
+  const flattenErrors = flat(
+    Object.keys(errors).map(key =>
+      errors[key].map<[string, OneError]>(error => [key, error])));
+
+  const newErrorPromise = flattenErrors.map(
+    ([key, promiseOrStr]) => {
+      const _p = (promiseOrStr instanceof Promise ? promiseOrStr : Promise.reject(promiseOrStr));//字符串改为Promise处理
+      return _p.then<[string, undefined], [string, string]>(() => [key, undefined], (reason) => [key, reason]);
+    }
+  );
+
+  Promise.all(newErrorPromise).then((res) => {
+    // res = [['username': undefined], ['pwd': 'too lang']]
+    callback(zip(res.filter<[string, string]>(hasError)));
   });
+
 };
 
+// 类型守卫
+function hasError(item: [string, undefined] | [string, string]): item is [string, string] {
+  return typeof item[1] === 'string'
+}
+
+function flat<T>(array: Array<T | T[]>) {
+  const result: T[] = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] instanceof Array) {
+      result.push(...array[i] as T[]);
+    } else {
+      result.push(array[i] as T);
+    }
+  }
+  return result;
+}
+
 //kvList: [['username': 'e1'], ['password': 'e2']]
-function zip(kvList:Array<[string, string[]]>) {
-  const result: any = {};
+function zip(kvList: Array<[string, string]>) {
+  const result: { [key: string]: string[] } = {};
   kvList.map(([key, value]) => {
     // kv: ['username': 'e1']
     result[key] = result[key] || [];
     result[key].push(value);
   });
-  return result;
-}
-
-function flat(array: Array<any>) {
-  const result = [];
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] instanceof Array) {
-      result.push(...array[i]);
-    } else {
-      result.push(array[i]);
-    }
-  }
   return result;
 }
 
