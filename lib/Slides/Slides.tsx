@@ -96,6 +96,7 @@ class Slides extends React.Component<IProps, IState> {
   }
 
   jumpTo(value: number): void {
+    // ! -> 显式赋值断言来帮助类型系统识别类型
     this.refSlidesInner.current!.style.transform = `translateX(-${(this.state.width || 0) * (value - 1)}px)`;
   }
 
