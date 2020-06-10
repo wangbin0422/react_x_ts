@@ -66,5 +66,4 @@ typings/
 lib/__tests__/__snapshots__
 lib/*/__tests__/__snapshots__
 .DS_Store
-.lfsconfig
 
